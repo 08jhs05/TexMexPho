@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/menu", (req, res) => {
-  res.send("Hello world and toronto& ottawa");
+  res.render("menu");
 });
 
 app.get("/orderplaced", (req, res) => {
