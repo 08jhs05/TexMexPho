@@ -49,17 +49,17 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
-
+// menu page
 app.get("/menu", (req, res) => {
   res.render("menu");
 });
-
-app.get("/orderplaced", (req, res) => {
-  res.send("Hello world and toronto& ottawa");
+// confirmation page
+app.get("/checkout", (req, res) => {
+  res.render("orderplaced");
 });
-
+// Secret restaurant page
 app.get("/restaurant", (req, res) => {
-  res.send("Hello world and toronto& ottawa");
+  res.render("restaurant");
 });
 
 app.listen(PORT, () => {
