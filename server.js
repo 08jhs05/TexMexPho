@@ -50,6 +50,18 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/menu", (req, res) => {
+  res.send("Hello world and toronto& ottawa");
+});
+
+app.get("/orderplaced", (req, res) => {
+  res.send("Hello world and toronto& ottawa");
+});
+
+app.get("/restaurant", (req, res) => {
+  res.send("Hello world and toronto& ottawa");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
