@@ -86,9 +86,11 @@ app.get("/orderplaced", (req, res) => {
       from: '+18326484365',
       to: tempDB.phone
     })
-    .then(message => console.log('sent text: customer to restaurant'))
+    .then(message => console.log(message))
     .catch(err => console.log(err));
   }
+
+  console.log('SMS: ')
   
   res.render("orderplaced");
 });
