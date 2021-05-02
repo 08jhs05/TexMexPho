@@ -25,7 +25,6 @@ const text = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 
-
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -65,8 +64,6 @@ app.use("/api/widgets", widgetsRoutes(db)); // <--
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 //---- GET ROUTES ---
-<<<<<<< HEAD
-=======
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -95,6 +92,7 @@ app.get("/orderplaced", (req, res) => {
     .catch(err => console.log(err));
   }
 
+  console.log(tempDB);
   res.render("orderplaced");
 });
 
@@ -108,7 +106,6 @@ app.get("/restaurant", (req, res) => {
   }
   res.render("restaurant", {tempDB, restaurantMsg });
 });
->>>>>>> feature/backend-setup
 
 //Seperated routes for each get and post
 const indexRoutes = require("./routes/index");
@@ -123,7 +120,6 @@ app.use("/orderplaced", orderplacedRoutes(db));
 app.use("/restaurant", restaurantRoutes(db));
 app.use("/checkout", checkoutRoutes(db));
 
-<<<<<<< HEAD
 //-- post router still needs work
 const checkoutPostRoutes = require("./routes/checkout-post");
 app.use("/", checkoutPostRoutes);
@@ -131,54 +127,8 @@ app.use("/", checkoutPostRoutes);
 // app.get("/", (req, res) => {
 //   res.render("index");
 // });
-=======
-app.post("/checkout",(req, res)=>{
-  const {burritoCount, banhCount, baoCount} = req.body;
 
-  tempDB.burrito = burritoCount;
-  tempDB.banh = banhCount;
-  tempDB.bao = baoCount;
-  //console.log(tempDB)
 
-  confirmOrder = `You ordered: ${tempDB.burrito} x Burrito \n${tempDB.banh} x Banh Mi \n${tempDB.bao} x Steamed Bao Taco`
->>>>>>> feature/backend-setup
-
-// // menu page
-// app.get("/menu", (req, res) => {
-//   res.render("menu");
-// });
-// confirmation page
-// app.get("/checkout", (req, res) => {
-//   console.log(req.body);
-//   console.log("orderplaced");
-//   res.render("orderplaced", { tempDB });
-// });
-// Secret restaurant page
-// app.get("/restaurant", (req, res) => {
-//   res.render("restaurant");
-// });
-
-// POST ROUTES -server
-
-<<<<<<< HEAD
-// app.post("/checkout", (req, res) => {
-//   console.log(req.body);
-//   let burger = req.body["burger"];
-//   let hotdog = req.body["hotdog"];
-//   let sandwich = req.body["sandwich"];
-//   if (burger === "") {
-//     tempDB.push("BURGER ITEM");
-//   }
-//   if (hotdog === "") {
-//     tempDB.push("HOTDOG ITEM");
-//   }
-//   if (sandwich === "") {
-//     tempDB.push("SANDWICH ITEM");
-//   }
-//   console.log(tempDB);
-//   res.redirect("/checkout");
-// });
-=======
 app.post("/orderplaced",(req, res)=>{
   //console.log(req.body);
   const { phone } = req.body;
@@ -196,8 +146,6 @@ app.post('/sms', (req, res) => {
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 });
-
->>>>>>> feature/backend-setup
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
