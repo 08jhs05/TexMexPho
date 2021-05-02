@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>Home Page</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  </head>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-  <body>
-    <%- include('partials/_header'); %>
+</head>
+
+<body>
+  <%- include('partials/_header'); %>
     <div class="main">
       <%- include('partials/_categories'); %>
-      <div class="menu-container">
-        <form method="POST" action="/checkout" name="menu-form">
-          <label for="burrito">Burritos $6:</label>
-          <input type="number" name="burritoCount" step="1">
-          <br>
-          <label for="banh">Banh Mi $4:</label>
-          <input type="number" name="banhCount" step="1">
-          <br>
-          <label for="bao">Steamed Bao Tacos $5:</label>
-          <input type="number" name="baoCount" step="1">
-
-          <br>
-          <input type="submit">
-        </form>
-      </div>
+        <div class="menu-container">
+          <form method="POST" action="/checkout" name="menu-form">
+            <article class="menu-item">
+              <img src="/pictures/burrito.jpg" alt="burrito-pic" />
+              <label for="burrito">Burritos $6:</label>
+              <input type="number" name="burritoCount" step="1">
+              <br>
+            </article>
+            <label for="banh">Banh Mi $4:</label>
+            <input type="number" name="banhCount" step="1">
+            <br>
+            <label for="bao">Steamed Bao Tacos $5:</label>
+            <input type="number" name="baoCount" step="1">
+            <br>
+            <input type="submit">
+          </form>
+        </div>
     </div>
-  </body>
+</body>
+
 </html>
