@@ -13,7 +13,11 @@
 
   <body>
     <%- include('partials/_header'); %>
-    <h1>RESTAURANT</h1>
-    <p> <%= restaurantMsg %> </p>
+    <h1>CHECKOUT</h1>
+    <p> <%= confirmOrder %> </p>
+    <form method="POST" action="/orderplaced" name="derp">
+      <input type="phone" name="phone" placeholder="Enter your number">
+      <button type="submit" name="customerFlag">Confirm Order</button>
+    </form>
   </body>
 </html>

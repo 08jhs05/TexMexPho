@@ -1,4 +1,6 @@
-const tempDB = [];
+const tempDB = {burrito: 0, banh: 0, bao: 0};
+let restaurantMsg = "";
+let confirmOrder = "";
 
 // load .env data into process.env
 require('dotenv').config();
@@ -11,6 +13,18 @@ const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
+
+const TWILIO_ACCOUNT_SID = 'AC547ac2535ae2016f2605a3536468b6e1';
+const TWILIO_AUTH_TOKEN = '0de15ac8fa5d67aa9183168bd7a16ca7';
+
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const client = require('twilio')(accountSid, authToken);
+
+const text = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+
+
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -57,33 +71,76 @@ app.get("/menu", (req, res) => {
 });
 // confirmation page
 app.get("/checkout", (req, res) => {
-  console.log(req.body);
-  console.log("orderplaced");
-  res.render("orderplaced", { tempDB });
+  res.render("checkout", { confirmOrder });
 });
+
+// Secret restaurant page
+app.get("/orderplaced", (req, res) => {
+  
+  if (tempDB.phone) {
+    restaurantMsg = `Customer ordered: ${tempDB.burrito} x Burrito, ${tempDB.banh} x Banh Mi, ${tempDB.bao} x Steamed Bao Taco`
+    
+    text.messages
+    .create({
+      body: restaurantMsg,
+      from: '+18326484365',
+      to: tempDB.phone
+    })
+    .then(message => console.log('sent text: customer to restaurant'))
+    .catch(err => console.log(err));
+  }
+  
+  res.render("orderplaced");
+});
+
 // Secret restaurant page
 app.get("/restaurant", (req, res) => {
-  res.render("restaurant");
+  
+  if (tempDB.phone) {
+    restaurantMsg = `Customer ordered: ${tempDB.burrito} x Burrito ${tempDB.banh} x Banh Mi ${tempDB.bao} x Steamed Bao Taco. Sending Text`   
+        
+    //console.log(`Restaurant: Hi ${tempDB.phone}, your order will be ready in 10minutes`)
+  }
+  res.render("restaurant", {tempDB, restaurantMsg });
 });
 
 
 // POST ROUTES
 
 app.post("/checkout",(req, res)=>{
-  console.log(req.body)
-  let burger = req.body["burger"];
-  let hotdog = req.body["hotdog"];
-  let sandwich = req.body["sandwich"];
+  const {burritoCount, banhCount, baoCount} = req.body;
 
-  if (burger ===""){
-    tempDB.push('BURGER ITEM')
-  }
-  console.log(tempDB)
+  tempDB.burrito = burritoCount;
+  tempDB.banh = banhCount;
+  tempDB.bao = baoCount;
+  //console.log(tempDB)
+
+  confirmOrder = `You ordered: ${tempDB.burrito} x Burrito \n${tempDB.banh} x Banh Mi \n${tempDB.bao} x Steamed Bao Taco`
 
   res.redirect('/checkout');
+});
+
+app.post("/orderplaced",(req, res)=>{
+  //console.log(req.body);
+  const { phone } = req.body;
+  tempDB.phone = phone;
+  //console.log("Twilio: Hi Restaurant, you got an order. Refresh your page");
+
+  res.redirect('/orderplaced');
+});
+
+app.post('/sms', (req, res) => {
+  const twiml = new MessagingResponse();
+  console.log(req.body)
+  twiml.message('The Robots are coming! Head for the hills!');
+
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
 });
 
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+

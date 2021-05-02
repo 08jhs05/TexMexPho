@@ -14,10 +14,24 @@
   <body>
     <%- include('partials/_header'); %>
     <h1>THIS is menu.</h1>
-    <form method="POST" action="/checkout" name="burger-form">
+    <!-- <form method="POST" action="/checkout" name="burger-form">
       <button type="submit" name="burger">burger</button>
       <button type="submit" name="hotdog">hotdog</button>
-      <button type="submit" name="sandwitch">sandwich</button>
+      <button type="submit" name="sandwich">sandwich</button>
+    </form> -->
+
+    <form method="POST" action="/checkout" name="menu-form">
+      <label for="burrito">Burritos $6:</label>
+      <input type="number" name="burritoCount" step="1">
+      <br>
+      <label for="banh">Banh Mi $4:</label>
+      <input type="number" name="banhCount" step="1">
+      <br>
+      <label for="bao">Steamed Bao Tacos $5:</label>
+      <input type="number" name="baoCount" step="1">
+
+      <br>
+      <input type="submit">
     </form>
   </body>
 </html>
