@@ -22,12 +22,20 @@
       <%- include('partials/_categories'); %>
         <div class="menu-container">
           <form method="POST" action="/checkout" name="menu-form">
+
             <article class="menu-item">
-              <img src="/pictures/burrito.jpg" alt="burrito-pic" />
-              <label for="burrito">Burritos $6:</label>
-              <input type="number" name="burritoCount" step="1">
+              <div class="menu-left">
+                <img class="img-props" src="/pictures/burrito.jpg" alt="burrito-pic" />
+              </div>
+              <div class="menu-right">
+                <h4 class="food-title">PORK BELLY BURRITO</h4>
+                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                <label for="burrito">Burritos $6:</label>
+                <input type="number" name="burritoCount" step="1">
+              </div>
               <br>
             </article>
+            <br>
             <label for="banh">Banh Mi $4:</label>
             <input type="number" name="banhCount" step="1">
             <br>
