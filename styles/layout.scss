@@ -105,6 +105,25 @@ body {
   .bottom-icons {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 20px;
+
+    .fa-money-check-alt:hover {
+      color: blue;
+    }
+
+    .spicy-row {
+      display: flex;
+      flex-direction: row;
+    }
+    .spicy-icon:hover {
+      color: red;
+    }
+
+    .fa-thumbs-up:hover {
+      color: green;
+    }
+
   }
 }
 
