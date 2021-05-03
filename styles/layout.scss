@@ -84,8 +84,9 @@ body {
   font-family: 'Roboto', sans-serif;
 
 
-  .menu-item:hover {
-    background-color: #888888;
+  &:hover {
+    background-color: #EEE;
+    //box-shadow: 5px 10px #888888;
   }
 
   .img-props {
