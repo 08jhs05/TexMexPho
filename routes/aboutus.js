@@ -1,4 +1,4 @@
-// -- GET - /
+// -- GET - /about_us
 const express = require("express");
 const router = express.Router();
 
@@ -8,7 +8,7 @@ module.exports = (db) => {
       .then((data) => {
         const users = data.rows;
         // res.json({ users });
-        res.render("index");
+        res.render("about_us");
         console.log("INDEX PAGE");
       })
       .catch((err) => {

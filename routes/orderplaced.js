@@ -1,17 +1,30 @@
+//-- GET - /orderplaced
 const express = require("express");
 const router = express.Router();
 //require the tempDB from server.js
-const tempDB = require("../server");
+let { tempDB, restaurantMsg, confirmOrder } = require("../server");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then((data) => {
         const users = data.rows;
-        // res.json({ users });
-        console.log(req.body);
         console.log("ORDER PLACED");
-        res.render("orderplaced", { tempDB });
+        if (tempDB.phone) {
+          restaurantMsg = `Customer ordered: ${tempDB.burrito} x Burrito, ${tempDB.banh} x Banh Mi, ${tempDB.bao} x Steamed Bao Taco`;
+
+          text.messages
+            .create({
+              body: restaurantMsg,
+              from: "+18326484365",
+              to: tempDB.phone,
+            })
+            .then((message) => console.log("sent text: customer to restaurant"))
+            .catch((err) => console.log(err));
+        }
+
+        console.log(tempDB);
+        res.render("orderplaced");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
