@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>Location Page</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -9,15 +9,17 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <%- include('partials/_header'); %>
-    <h1>CHECK OUT</h1>
-    <p><%= confirmation %></p>
-    <form method="POST" action="/orderplaced" name="derp">
-      <input type="phone" name="phone" placeholder="Enter your number" />
-      <button type="submit" name="customerFlag">Confirm Order</button>
-    </form>
+    <h1>Our Location!</h1>
+    <p></p>
   </body>
 </html>
-<!-- confirmOrder - was in p tag -->
