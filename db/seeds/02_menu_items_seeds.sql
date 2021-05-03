@@ -19,7 +19,7 @@ INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Pork Pho
 INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Pho Taco', 800, 4, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
 INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Kimchi Poutine', 1799, 4, 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system');
 INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Chocolate Ramen', 2000, 4, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque');
-INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Dog Sushi', 1299, 4, 'Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?');
+INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Penguin Sushi', 2000, 4, 'Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?');
 INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Apple iPad', 50000, 4, 'But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences');
 
 INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Fried Banana', 399, 5, 'cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. ');
@@ -29,3 +29,4 @@ INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Pepsi', 
 INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Sprite', 300, 6, 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?');
 INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Heineken', 599, 6, 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor');
 INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Apple Juice', 299, 6, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque');
+INSERT INTO menu_items (name, price, catetory_id, description) VALUES ('Strong Zero', 500, 6, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque');
