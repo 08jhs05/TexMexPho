@@ -8,26 +8,27 @@ const pool = new Pool({
 });
 
 
-const getUserOrder = function(number) {
+const getUserOrder = function(orderID) {
 
-  // Our query using node-postgres. The $ sign formatting is to prevent SQL injection which
-  // is followed by a second parameter as an array of the query item to actually look for
-  // [email] in this case
   return pool
   .query(`
-  SELECT menu_id
+  SELECT menu_items.name, quantity, menu_items.price
   FROM order_items
+  JOIN menu_items ON menu_items.id = menu_id
   WHERE order_id = $1;
-  `, [number])
+  `, [orderID])
   .then((result) => {
     console.log(result.rows)
-    //return result.rows[0] || null;
+    return result.rows[0].name;
   })
   .catch((err) => {
     console.log(err.message);
   });
-
-
 }
 
+
 getUserOrder(1);
+
+exports.getUserOrder = getUserOrder;
+
+//module.exports = {getUserOrder}

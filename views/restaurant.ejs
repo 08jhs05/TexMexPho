@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   </head>
   <body>
+    
     <%- include('partials/_header'); %>
     <h1>RESTAURANT</h1>
-    <p> <%= restaurantMsg %> </p>
+    <p> <%= newOrder[0].name %> </p>
+    <!-- <p> <%= restaurantMsg %> </p> -->
 
     <h3>NEW ORDERS</h3>
     <div class="card" style="width: 18rem;">
@@ -23,14 +25,21 @@
         <h5 class="card-title">ORDER #: 123</h5>
         <hr>
         <ul>
-          <li>Coffee</li>
-          <li>Tea</li>
-          <li>Milk</li>
+          <% let sum=0 %>
+          <% for (let obj of newOrder) { %>
+            <% sum+= obj['price'] %>
+            <li>
+              <%= obj['name'] %> x <%= obj['quantity'] %> 
+            </li>
+            <% } %>
+
         </ul>  
         <p class="card-text">Modifications explained here.</p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><b>TOTAL:</b> $45</li>
+        <li class="list-group-item"><b>TOTAL:</b> 
+        <%= sum %>
+        </li>
       </ul>
       <div class="card-body">
         
