@@ -10,49 +10,48 @@ let { tempDB, restaurantMsg, confirmOrder } = require("../server");
 
 
 
-// const { Pool } = require('pg');
+const { Pool } = require('pg');
 
-// const pool = new Pool({
-//   user: 'labber',
-//   password: 'labber',
-//   host: 'localhost',
-//   database: 'midterm'
-// });
+const pool = new Pool({
+  user: 'labber',
+  password: 'labber',
+  host: 'localhost',
+  database: 'midterm'
+});
 
 
-// const getUserOrder = function(orderID) {
-//   return pool
-//   .query(`
-//   SELECT menu_items.name, quantity
-//   FROM order_items
-//   JOIN menu_items ON menu_items.id = menu_id
-//   WHERE order_id = $1;
-//   `, [orderID])
-//   .then((result) => {
-//     console.log(result.rows[0].name)
-//     return result.rows[0].name;
-//   })
-//   .catch((err) => {
-//     console.log(err.message);
-//   });
-// }
+const getUserOrder = function(orderID) {
+  return pool
+  .query(`
+  SELECT menu_items.name, quantity
+  FROM order_items
+  JOIN menu_items ON menu_items.id = menu_id
+  WHERE order_id = $1;
+  `, [orderID])
+  .then((result) => { 
+    return result.rows;
+  })
+}
 
-// let newOrder = getUserOrder(1);
 
-let newOrder = [
-  { name: 'Nacho Chips', quantity: 3, price: 700 },
-  { name: 'Bun Cha', quantity: 1, price: 1299 }
-];
+// THIS IS SOME TEST HARDCODED DATABASES
+
+// let newOrder = [
+//   { name: 'Nacho Chips', quantity: 3, price: 700 },
+//   { name: 'Bun Cha', quantity: 1, price: 1299 }
+// ];
+
+// let otherOrder = [
+//   { order_id: 1, name: 'Nacho Chips', quantity: 3, price: 700 },
+//   { order_id: 1, name: 'Bun Cha', quantity: 1, price: 1299 },
+//   { order_id: 2, name: 'Empanada', quantity: 4, price: 1650 }
+// ]
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then((newOrder))
-      
-      .then((data) => {
-        const users = data.rows;
-        // res.json({ users });
-        // res.render("restaurant");
+    getUserOrder(1)
+      .then((newOrder) => {
+        
         console.log("RESTAURANT PAGE");
         if (tempDB.phone) {
           restaurantMsg = `Customer ordered: ${tempDB.burrito} x Burrito ${tempDB.banh} x Banh Mi ${tempDB.bao} x Steamed Bao Taco. Sending Text`;
