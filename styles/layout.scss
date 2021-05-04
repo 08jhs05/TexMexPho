@@ -139,5 +139,26 @@ body {
   }
 }
 
+// RESTAURANT CSS
+.card {
+  margin: 10px;
 
+
+  .sms-post {
+    //background-color: transparent;
+    //border: none;
+    outline: none;
+    font-family: inherit;
+    width: 100%;
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    font-family: 'Roboto', sans-serif;
+
+    padding: 20px;
+    margin-bottom: 10px;
+    resize: none;
+  }
+
+}
 

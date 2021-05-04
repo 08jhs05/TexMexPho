@@ -16,5 +16,36 @@
     <%- include('partials/_header'); %>
     <h1>RESTAURANT</h1>
     <p> <%= restaurantMsg %> </p>
+
+    <h3>NEW ORDERS</h3>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">ORDER #: 123</h5>
+        <hr>
+        <ul>
+          <li>Coffee</li>
+          <li>Tea</li>
+          <li>Milk</li>
+        </ul>  
+        <p class="card-text">Modifications explained here.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>TOTAL:</b> $45</li>
+      </ul>
+      <div class="card-body">
+        
+        <textarea class="sms-post" name="text" placeholder="Type SMS to customer and click accept or reject"></textarea>
+
+        <button type="button" class="btn btn-success">ACCEPT</button>
+        <button type="button" class="btn btn-danger">REJECT</button>
+
+      </div>
+    </div>
+
+    <h3>PENDING ORDERS</h3>
+
+    
+
+
   </body>
 </html>
