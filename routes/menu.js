@@ -4,12 +4,23 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+    db.query(`SELECT * FROM menu_items;`)
       .then((data) => {
-        const users = data.rows;
-        // res.json({ users });
-        res.render("menu");
-        console.log("MENU PAGE");
+        const menuItems = data.rows;
+        db.query(`SELECT * FROM categories;`).then(data2 => {
+
+          const categories = [];
+          const menus = {};
+
+          for(const category of data2.rows) {
+            categories.push(category.name);
+            menus[category.name] = [];
+          }
+          for(const menuItem of menuItems) {
+            menus[categories[menuItem.category_id - 1]].push(menuItem);
+          }
+          res.render("menu", { menus, categories });
+        })
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

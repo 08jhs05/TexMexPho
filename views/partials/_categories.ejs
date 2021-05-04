@@ -4,23 +4,10 @@
   </div>
 
   <ul class="list-unstyled components">
-      <li>
-        <div class="sidebar-item">Appitizers</div>
-      </li>
-      <li>
-        <div class="sidebar-item">Mex Tex Pho</div>
-      </li>
-      <li>
-        <div class="sidebar-item">Tex Pho Mex</div>
-      </li>
-      <li>
-        <div class="sidebar-item">Mex Mex Pho</div>
-      </li>
-      <li>
-        <div class="sidebar-item">Mex Tex Mex Pho</div>
-      </li>
-      <li>
-        <div class="sidebar-item">Desserts</div>
-      </li>
+      <% for(let category of categories) { %>
+        <li>
+          <div class="sidebar-item"><%= category %></div>
+        </li>
+      <% } %>
   </ul>
 </div>

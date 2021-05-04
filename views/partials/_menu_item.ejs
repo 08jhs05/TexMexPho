@@ -1,0 +1,34 @@
+<article class="menu-item">
+  <div class="menu-left">
+    <img class="img-props" src="/pictures/burrito.jpg" alt="burrito-pic" />
+  </div>
+  <div class="menu-right">
+    <h4 class="food-title"> <%= item.name %></h4>
+    <span><%= item.description %></span>
+    <div class="bottom-icons">
+      <div>
+        <i class="fas fa-money-check-alt"></i>
+        <span>$<%= (item.price/100).toFixed(2) %></span>
+      </div>
+
+      <div class="spicy-row">
+        <div class="spicy-icon">
+          <i class="fas fa-pepper-hot"></i>
+          <i class="fas fa-pepper-hot"></i>
+        </div>
+        <span>Spicy</span>
+      </div>
+
+      <div>
+        <i class="fas fa-thumbs-up"></i>
+        <span>Recommend</span>
+      </div>
+
+    </div>
+    <div class="bottom-order">
+      <input type="number" name="burritoCount" value="1" min="1" max="20" step="1" />
+      <button type="button" class="btn btn-primary btn-lg btn-block add-cart">Add to cart</button>
+    </div>
+  </div>
+  <br>
+</article>
