@@ -29,7 +29,7 @@ const getUserOrder = function() {
 }
 
 
-getUserOrder(1);
+getUserOrder();
 
 exports.getUserOrder = getUserOrder;
 
@@ -42,3 +42,8 @@ exports.getUserOrder = getUserOrder;
 // JOIN menu_items ON menu_items.id = menu_id
 // WHERE order_id = $1;
 // `, [orderID])
+
+SELECT menu_items.name, quantity, menu_items.price
+FROM order_items
+JOIN menu_items ON menu_items.id = menu_id
+WHERE order_id = $1;

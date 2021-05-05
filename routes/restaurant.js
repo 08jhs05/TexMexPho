@@ -5,11 +5,6 @@ const router = express.Router();
 let { tempDB, restaurantMsg, confirmOrder } = require("../server");
 // let { getUserOrder } = require("../restaurant_db")
 
-// let newOrder = getUserOrder(1);
-// console.log('THIS IS in restaurant.js' + newOrder)
-
-
-
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -19,19 +14,32 @@ const pool = new Pool({
   database: 'midterm'
 });
 
-
-const getUserOrder = function(orderID) {
+const getUserOrder = function() {
   return pool
   .query(`
-  SELECT menu_items.name, quantity
+  SELECT order_id, menu_items.name, quantity, menu_items.price
   FROM order_items
   JOIN menu_items ON menu_items.id = menu_id
-  WHERE order_id = $1;
-  `, [orderID])
+  ORDER BY order_id ASC;
+  `)
   .then((result) => { 
     return result.rows;
   })
 }
+
+
+// const getUserOrder = function(orderID) {
+//   return pool
+//   .query(`
+//   SELECT menu_items.name, quantity, menu_items.price
+//   FROM order_items
+//   JOIN menu_items ON menu_items.id = menu_id
+//   WHERE order_id = $1;
+//   `, [orderID])
+//   .then((result) => { 
+//     return result.rows;
+//   })
+// }
 
 
 // THIS IS SOME TEST HARDCODED DATABASES
@@ -49,16 +57,31 @@ const getUserOrder = function(orderID) {
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    getUserOrder(1)
-      .then((newOrder) => {
+    getUserOrder()
+      .then((totalOrders) => {
         
-        console.log("RESTAURANT PAGE");
-        if (tempDB.phone) {
-          restaurantMsg = `Customer ordered: ${tempDB.burrito} x Burrito ${tempDB.banh} x Banh Mi ${tempDB.bao} x Steamed Bao Taco. Sending Text`;
-
-          //console.log(`Restaurant: Hi ${tempDB.phone}, your order will be ready in 10minutes`)
+        let tempId = 0;
+        let arrObj = [[]];
+        let arrObjIndex=0;
+        let flag = true;
+        
+        for (let objId of totalOrders) {
+          if (flag) {
+            tempId = objId['order_id'];
+            flag = false;
+           }
+          
+          if (tempId === objId['order_id']) {
+            arrObj[arrObjIndex].push(objId);
+          } else {
+            arrObjIndex +=1;
+            arrObj.push([]);
+            arrObj[arrObjIndex].push(objId);
+            tempId = objId['order_id']
+          }   
         }
-        res.render("restaurant", { tempDB, restaurantMsg, newOrder });
+
+        res.render("restaurant", {  arrObj });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -66,3 +89,30 @@ module.exports = (db) => {
   });
   return router;
 };
+
+
+//THIS PART OF THE CODE SETS FOOD ORDERS DATABASE INTO AN ARRAY
+// let tempId = 0;
+// let arrObj = [[]];
+// let arrObjIndex=0;
+// let flag = true;
+
+// for (let objId of otherOrder) {
+	
+//   //if (objId['order_id'] === temp
+//   if (flag) {
+//   	tempId = objId['order_id'];
+//     flag = false;
+//    }
+	
+//   if (tempId === objId['order_id']) {
+//   	arrObj[arrObjIndex].push(objId);
+// 	} else {
+//     arrObjIndex +=1;
+//     arrObj.push([]);
+//     arrObj[arrObjIndex].push(objId);
+//     tempId = objId['order_id']
+//   }   
+// }
+
+// console.log(arrObj[1])

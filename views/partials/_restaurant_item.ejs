@@ -1,0 +1,31 @@
+<article class="new-order-items">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">ORDER #: 123</h5>
+      <hr>
+      <ul>
+        <% let sum=0 %>
+          <% for (let obj of newOrder) { %>
+            <% sum+=obj['price']*obj['quantity'] %>
+              <li>
+                <%= obj['name'] %> x <%= obj['quantity'] %>
+              </li>
+              <% } %>
+
+      </ul>
+      <p class="card-text">Modifications explained here.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><b>TOTAL:</b>
+        <%= sum %>
+      </li>
+    </ul>
+    <div class="card-body">
+
+      <textarea class="sms-post" name="text" placeholder="Type SMS to customer and click accept or reject"></textarea>
+
+      <button type="button" class="btn btn-success">ACCEPT</button>
+      <button type="button" class="btn btn-danger">REJECT</button>
+    </div>
+  </div>
+</article>
