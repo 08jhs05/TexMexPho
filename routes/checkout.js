@@ -25,7 +25,7 @@ module.exports = (db) => {
     Promise.all(promises).then(values => {
       let templatevars = {};
       for (const item of values) {
-        templatevars[item.rows[0].name] = { photo_url: item.rows[0].photo_url, price: item.rows[0].price, quantity: cart[item.rows[0].name].quantity };
+        templatevars[item.rows[0].name] = { photo_url: item.rows[0].photo_url, price: item.rows[0].price, quantity: cart[item.rows[0].name].quantity, menu_id: cart[item.rows[0].name].menu_id};
       }
       res.render("checkout", { templatevars });
     }).catch((err) => {
