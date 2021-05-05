@@ -7,10 +7,6 @@
 body {
   background-color: #EEE;
 
-  h1 {
-    color: #244751;
-  }
-
   header {
     position: fixed;
     width: 100%;
@@ -29,10 +25,16 @@ body {
       }
 
       .btn {
+        width: 200px;
+        margin-right: 60px;
         background-color: #EEE;
         color: brown;
       }
     }
+  }
+
+  .checkoutItems {
+    padding-top: 80px;
   }
 
   #main {
@@ -45,11 +47,11 @@ body {
       position: fixed;
       color: black;
       height: 100vh;
-      width: 360px;
+      width: 340px;
       box-shadow: 10px 0px 10px grey;
 
       #sidebar-title {
-        font-size: 32px;
+        font-size: 28px;
         margin-bottom: 40px;
         margin-left: 60px;
       }
@@ -78,7 +80,7 @@ body {
 .menu-item {
   background-color: #FFF;
   width: 95%;
-  height: 400px;
+  height: 280px;
   margin: 40px 0px;
   margin-right: 20px;
   padding: 25px;
@@ -88,6 +90,10 @@ body {
   flex-direction: row;
   font-family: 'Roboto', sans-serif;
 
+  .price {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   &:hover {
     background-color: #EEE;
@@ -95,7 +101,14 @@ body {
   }
 
   .img-props {
+    width: 225px;
+    height: 225px;
     border-radius: 30px;
+  }
+
+  .menu-top {
+    display: flex;
+    flex-direction: row;
   }
 
   .menu-left {
@@ -103,7 +116,10 @@ body {
   }
 
   .menu-right {
+    justify-content: space-around;
+    width: 80%;
     padding-left: 25px;
+    padding-right: 25px;
     display: flex;
     flex-direction: column;
   }
@@ -112,7 +128,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 10px 20px;
+    margin: 10px 10px;
 
     .fa-money-check-alt:hover {
       color: blue;

@@ -5,24 +5,17 @@ const router = express.Router();
 //require the tempDB from server.js
 const { tempDB, restaurantMsg, confirmOrder } = require("../server");
 
+let cart = {};
+
 module.exports = (db) => {
+  router.post("/", (req, res) => {
+    cart = req.body;
+    res.redirect("/checkout")
+  })
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then((data) => {
-        const users = data.rows;
-        // res.json({ users });
-        //TO DO: check if these values ccan be accessed within respective ejs files
-        const templateVariables = {
-          temporaryData: tempDB,
-          restoMsg: restaurantMsg,
-          confirmation: confirmOrder,
-          burritoCount: tempDB.burrito,
-          banhCount: tempDB.ban,
-          baoCount: tempDB.bao,
-        };
-        res.render("checkout", templateVariables);
-        // console.log("CHECK OUT PAGE");
-        console.log("CONFIRM ORDER -->", confirmOrder);
+        res.render("checkout", {cart});
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
