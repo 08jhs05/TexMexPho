@@ -51,7 +51,10 @@ const getUserOrder = function() {
 let otherOrder = [
   { order_id: 1, name: 'Nacho Chips', quantity: 3, price: 700 },
   { order_id: 1, name: 'Bun Cha', quantity: 1, price: 1299 },
-  { order_id: 2, name: 'Penguin Sushi', quantity: 4, price: 1650 }
+  { order_id: 2, name: 'Empanada', quantity: 4, price: 1650 },
+  { order_id: 3, name: 'Nacho Chips', quantity: 3, price: 700 },
+  { order_id: 3, name: 'Bun Cha', quantity: 5, price: 1299 },
+  { order_id: 3, name: 'Empanada', quantity: 4, price: 16500 }
 ]
 
 module.exports = (db) => {
@@ -64,7 +67,7 @@ module.exports = (db) => {
         let arrObjIndex=0;
         let flag = true;
         
-        for (let objId of totalOrders) {
+        for (let objId of otherOrder) {
           if (flag) {
             tempId = objId['order_id'];
             flag = false;
@@ -93,7 +96,22 @@ router.post ("/", (req, res) => {
   //console.log(req.body);
   console.log(req.body);
 
-  const { order_to_delete, text, accept, reject } = req.body
+  const { order_to_delete, text, accept, reject } = req.body;
+  tempArr = [];
+
+  if(accept === '') {
+    console.log(text);
+    tempArr=[];
+    for (let el of otherOrder) {
+      console.log(el);
+      if (el.order_id !== parseInt(order_to_delete)) {
+        tempArr.push(el)
+      }
+    }
+    otherOrder = tempArr;
+  }
+
+
 
   res.redirect("/restaurant");
 });
