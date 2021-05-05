@@ -18,15 +18,33 @@
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" />
 
-
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
+  <!-- <script type="text/javascript" src="/scripts/menu.js"></script> -->
 </head>
 
 <body>
-  <%- include('partials/_header'); %>
+  <!-- NAVBAR HEADER -->
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <a class="navbar-brand ml-5" href="/">TexMexPho</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link mr-4" href="/">MENU</a>
+          <a class="nav-item nav-link mr-4" href="/">LOCATION</a>
+          <a class="nav-item nav-link mr-4" href="/">ABOUT US</a>
+          <button type="submit" class="btn btn-outline-light" id="viewCart">VIEW CART</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- NAVBAR HEADER ENDS-->
+
     <div id="main">
       <%- include('partials/_categories', { categories }); %>
         <div class="menu-container">
@@ -36,17 +54,39 @@
         </div>
     </div>
     <script>
+      const cart = {};
       const menuObj = JSON.parse('<%- JSON.stringify(menus) %>');
+      let currentMenuShown = {};
+
+      for(const menuItem of menuObj.Appetizers) {
+        currentMenuShown[menuItem.name] = menuItem;
+      }
+
+      $("#viewCart").click(function() {
+        $.post("/checkout", cart)
+        .done(function(res){
+          window.location = "/checkout"; });
+      })
+
+      $(".add-cart").on("click", function() {
+        const currentItemSelected = $(this).find("#itemname")[0].textContent;
+        const quantity = Number($(this).siblings('input')[0].value);
+        cart[currentItemSelected] = {quantity: quantity, menu_id: currentMenuShown[currentItemSelected].id};
+        $("#viewCart").html(`VIEW CART (${Object.keys(cart).length})`);
+      })
+
       $(".sidebar-item").click(function() {
+        currentMenuShown = {};
         $(".menu-container").empty();
         for(const item of menuObj[this.textContent]) {
+          currentMenuShown[item.name] = item;
           $(".menu-container").append(`
             <article class="menu-item">
               <div class="menu-left">
                 <img class="img-props" src="/pictures/burrito.jpg" alt="burrito-pic" />
               </div>
               <div class="menu-right">
-                <h4 class="food-title"> ${item.name} </h4>
+                <h4 class="food-title">${item.name}</h4>
                 <span>${item.description}</span>
                 <div class="bottom-icons">
                   <div>
@@ -70,13 +110,21 @@
                 </div>
                 <div class="bottom-order">
                   <input type="number" name="burritoCount" value="1" min="1" max="20" step="1" />
-                  <button type="button" class="btn btn-primary btn-lg btn-block add-cart">Add to cart</button>
+                  <button type="button" class="btn btn-primary btn-lg btn-block add-cart">Add to cart
+                    <div id="itemname" hidden>${item.name}</div>
+                    </button>
                 </div>
               </div>
               <br>
             </article>
         `);
         }
+        $(".add-cart").on('click', function() {
+          const currentItemSelected = $(this).find("#itemname")[0].textContent;
+          const quantity = Number($(this).siblings('input')[0].value);
+          cart[currentItemSelected] = {quantity: quantity, menu_id: currentMenuShown[currentItemSelected].id};
+          $("#viewCart").html(`VIEW CART (${Object.keys(cart).length})`);
+        })
       });
     </script>
 </body>

@@ -3,7 +3,7 @@
     <img class="img-props" src="/pictures/burrito.jpg" alt="burrito-pic" />
   </div>
   <div class="menu-right">
-    <h4 class="food-title"> <%= item.name %></h4>
+    <h4 class="food-title"><%= item.name %></h4>
     <span><%= item.description %></span>
     <div class="bottom-icons">
       <div>
@@ -26,8 +26,10 @@
 
     </div>
     <div class="bottom-order">
-      <input type="number" name="burritoCount" value="1" min="1" max="20" step="1" />
-      <button type="button" class="btn btn-primary btn-lg btn-block add-cart">Add to cart</button>
+      <input type="number" name="quantity" value="1" min="1" max="20" step="1" />
+      <button type="button" class="btn btn-primary btn-lg btn-block add-cart">Add to cart
+        <div id="itemname" hidden><%= item.name %></div>
+      </button>
     </div>
   </div>
   <br>
