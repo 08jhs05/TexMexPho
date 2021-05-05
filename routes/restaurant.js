@@ -27,26 +27,7 @@ const getUserOrder = function() {
   })
 }
 
-// const getUserOrder = function() {
-//   return pool
-//   .query(`
-//   SELECT order_id, menu_items.name, quantity, menu_items.price
-//   FROM order_items
-//   JOIN menu_items ON menu_items.id = menu_id
-//   ORDER BY order_id ASC;
-//   `)
-//   .then((result) => { 
-//     return result.rows;
-//   })
-// }
-
-
 // THIS IS SOME TEST HARDCODED DATABASES
-
-// let newOrder = [
-//   { name: 'Nacho Chips', quantity: 3, price: 700 },
-//   { name: 'Bun Cha', quantity: 1, price: 1299 }
-// ];
 
 let otherOrder = [
   { order_id: 1, name: 'Nacho Chips', quantity: 3, price: 700 },
@@ -67,6 +48,8 @@ module.exports = (db) => {
         let arrObjIndex=0;
         let flag = true;
         
+        //Change otherOrder to totalOrders in order to use real database
+        //Must also comment out the post request as it is using the hardcoded db for now
         for (let objId of otherOrder) {
           if (flag) {
             tempId = objId['order_id'];
@@ -92,9 +75,9 @@ module.exports = (db) => {
   return router;
 };
 
+
+// THIS IS FOR HARDCODED DATABASE
 router.post ("/", (req, res) => {
-  //console.log(req.body);
-  console.log(req.body);
 
   const { order_to_delete, text, accept, reject } = req.body;
   tempArr = [];
@@ -111,7 +94,6 @@ router.post ("/", (req, res) => {
     otherOrder = tempArr;
   }
 
-
-
   res.redirect("/restaurant");
 });
+ 
