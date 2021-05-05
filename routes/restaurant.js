@@ -1,4 +1,4 @@
-//-- GET - /restaurant
+//-- GET - /restaurant  
 //  Secret restaurant page
 const express = require("express");
 const router = express.Router();
@@ -27,6 +27,19 @@ const getUserOrder = function() {
   })
 }
 
+
+const deleteOrder = function(orderId) {
+  return pool
+  .query(`
+  DELETE FROM order_items 
+  WHERE order_id = $1;
+  `, [orderId])
+  .then((result) => { 
+    return result.rows;
+  })
+}
+
+
 // THIS IS SOME TEST HARDCODED DATABASES
 
 let otherOrder = [
@@ -50,7 +63,7 @@ module.exports = (db) => {
         
         //Change otherOrder to totalOrders in order to use real database
         //Must also comment out the post request as it is using the hardcoded db for now
-        for (let objId of otherOrder) {
+        for (let objId of totalOrders) {
           if (flag) {
             tempId = objId['order_id'];
             flag = false;
@@ -76,24 +89,42 @@ module.exports = (db) => {
 };
 
 
-// THIS IS FOR HARDCODED DATABASE
 router.post ("/", (req, res) => {
 
   const { order_to_delete, text, accept, reject } = req.body;
   tempArr = [];
-
+  console.log(text);
   if(accept === '') {
-    console.log(text);
-    tempArr=[];
-    for (let el of otherOrder) {
-      console.log(el);
-      if (el.order_id !== parseInt(order_to_delete)) {
-        tempArr.push(el)
-      }
-    }
-    otherOrder = tempArr;
+    deleteOrder(order_to_delete)
+    .then((newDB) => {
+
+      res.redirect("/restaurant");
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
   }
 
-  res.redirect("/restaurant");
+  
 });
  
+// THIS IS FOR HARDCODED DATABASE
+// router.post ("/", (req, res) => {
+
+//   const { order_to_delete, text, accept, reject } = req.body;
+//   tempArr = [];
+
+//   if(accept === '') {
+//     console.log(text);
+//     tempArr=[];
+//     for (let el of otherOrder) {
+//       console.log(el);
+//       if (el.order_id !== parseInt(order_to_delete)) {
+//         tempArr.push(el)
+//       }
+//     }
+//     otherOrder = tempArr;
+//   }
+
+//   res.redirect("/restaurant");
+// });
