@@ -38,7 +38,7 @@
           <a class="nav-item nav-link mr-4" href="/">MENU</a>
           <a class="nav-item nav-link mr-4" href="/">LOCATION</a>
           <a class="nav-item nav-link mr-4" href="/">ABOUT US</a>
-          <button type="submit" class="btn btn-outline-light" id="viewCart">VIEW CART</button>
+          <button type="submit" class="btn btn-outline-light" id="viewCart"><i class="fas fa-shopping-cart"></i> VIEW CART</button>
         </div>
       </div>
     </nav>
@@ -72,7 +72,7 @@
         const currentItemSelected = $(this).find("#itemname")[0].textContent;
         const quantity = Number($(this).siblings('input')[0].value);
         cart[currentItemSelected] = {quantity: quantity, menu_id: currentMenuShown[currentItemSelected].id};
-        $("#viewCart").html(`VIEW CART (${Object.keys(cart).length})`);
+        $("#viewCart").html(`<i class="fas fa-shopping-cart"></i> VIEW CART (${Object.keys(cart).length})`);
       })
 
       $(".sidebar-item").click(function() {
@@ -125,7 +125,7 @@
           const currentItemSelected = $(this).find("#itemname")[0].textContent;
           const quantity = Number($(this).siblings('input')[0].value);
           cart[currentItemSelected] = {quantity: quantity, menu_id: currentMenuShown[currentItemSelected].id};
-          $("#viewCart").html(`VIEW CART (${Object.keys(cart).length})`);
+          $("#viewCart").html(`<i class="fas fa-shopping-cart"></i> VIEW CART (${Object.keys(cart).length})`);
         })
       });
     </script>

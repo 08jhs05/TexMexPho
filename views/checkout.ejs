@@ -16,7 +16,43 @@
   </head>
   <body>
     <%- include('partials/_header'); %>
-    <p class="checkoutItems"><%= JSON.stringify(cart) %> </p>
+    <div class="header-filler"> </div>
+    <div class="checkout-container">
+      <h3 class="order-title">Your Order</h3>
+      <div class="borderline"></div>
+      <div class="order-columns">
+        <div class="column">ITEMS</div>
+        <div class="column">QUANTITY</div>
+        <div class="column">PRICE</div>
+        <div class="column">TOTAL</div>
+      </div>
+        <% for(const item in templatevars) { %>
+          <div class="order-item-rows">
+            <div class="item-name"> <img src="<%= templatevars[item].photo_url %> asdasd.jpg" class="item-photo"> <%= item %> </div>
+            <div class="item-quantity"> <%= templatevars[item].quantity %> </div>
+            <div class="item-price"> <%= (templatevars[item].price/100).toFixed(2) %> </div>
+            <div class="item-total"> <%= ((templatevars[item].price * templatevars[item].quantity)/100).toFixed(2) %> </div>
+          </div>
+        <% } %>
+        <div class="tax-total-row">
+          <div class="subtotal"></div>
+          <div class="tax"></div>
+          <div class="borderline"></div>
+          <div class="total"></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="checkout-button">CHECKOUT</button>
+    </div>
+    <script>
+      let subtotal = 0;
+      $(".order-item-rows").each(function() {
+          subtotal += (Number($(this).find(".item-total")[0].textContent));
+        }
+      )
+      let tax = ( subtotal * 0.13 ).toFixed(2);
+      $(".subtotal").html(`Subtotal: ${subtotal}`);
+      $(".tax").html(`Tax: ${tax}`);
+      $(".total").html(`TOTAL: ${Number(subtotal) + Number(tax)}`);
+    </script>
   </body>
 </html>
 <!-- confirmOrder - was in p tag -->

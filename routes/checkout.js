@@ -12,14 +12,25 @@ module.exports = (db) => {
     cart = req.body;
     res.redirect("/checkout")
   })
+
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then((data) => {
-        res.render("checkout", {cart});
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+
+    const promises = [];
+
+    for(const item in cart) {
+      //console.log(cart[item].menu_id);
+      promises.push(db.query(`SELECT * FROM menu_items WHERE id = $1;`, [cart[item].menu_id]))
+    }
+
+    Promise.all(promises).then(values => {
+      let templatevars = {};
+      for (const item of values) {
+        templatevars[item.rows[0].name] = { photo_url: item.rows[0].photo_url, price: item.rows[0].price, quantity: cart[item.rows[0].name].quantity };
+      }
+      res.render("checkout", { templatevars });
+    }).catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
   });
   return router;
 };
