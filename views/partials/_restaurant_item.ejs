@@ -1,7 +1,7 @@
 <article class="new-order-items">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">ORDER #: 123</h5>
+      <h5 class="card-title">ORDER #: <%= newOrder[0]['order_id'] %></h5>
       <hr>
       <ul>
         <% let sum=0 %>
@@ -21,11 +21,12 @@
       </li>
     </ul>
     <div class="card-body">
-
+    <form action="/restaurant" method="POST">
+      <textarea hidden class="sms-post" name="order_to_delete"><%=newOrder[0]['order_id'] %></textarea>
       <textarea class="sms-post" name="text" placeholder="Type SMS to customer and click accept or reject"></textarea>
-
-      <button type="button" class="btn btn-success">ACCEPT</button>
-      <button type="button" class="btn btn-danger">REJECT</button>
+      <button type="submit" name="accept" class="btn btn-success">ACCEPT</button>
+      <button type="submit" name="reject" class="btn btn-danger">REJECT</button>
+    </form>
     </div>
   </div>
 </article>

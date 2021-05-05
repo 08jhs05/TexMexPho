@@ -70,6 +70,7 @@ const restaurantRoutes = require("./routes/restaurant");
 const checkoutRoutes = require("./routes/checkout");
 const locationRoute = require("./routes/location");
 const aboutUsRoute = require("./routes/aboutus");
+const ordersentRoute = require("./routes/ordersent");
 
 app.use("/", indexRoutes(db));
 app.use("/menu", menuRoutes(db));
@@ -78,6 +79,7 @@ app.use("/restaurant", restaurantRoutes(db));
 app.use("/checkout", checkoutRoutes(db));
 app.use("/location", locationRoute(db));
 app.use("/about_us", aboutUsRoute(db));
+app.use("/ordersent", ordersentRoute(db));
 
 //--- POST ROUTER ROUTES
 const checkoutPostRoutes = require("./routes/checkout-post");

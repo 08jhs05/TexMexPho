@@ -145,9 +145,10 @@ body {
 }
 
 // RESTAURANT CSS
+
+
 .card {
   margin: 10px;
-
 
   .sms-post {
     //background-color: transparent;
@@ -167,3 +168,7 @@ body {
 
 }
 
+.new-order-container {
+  display: flex;
+  flex-direction: row;
+}
