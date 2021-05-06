@@ -54,16 +54,18 @@
       console.log(insertOrder_item);
 
       $(".order-item-rows").each(function() {
-          subtotal += (Number($(this).find(".item-total")[0].textContent));
+          subtotal += (Number($(this).find(".item-total")[0].textContent) * 100);
         }
       )
 
+      subtotal = (subtotal / 100).toFixed(2);
+
       let tax = ( subtotal * 0.13 ).toFixed(2);
-      let total = Number(subtotal) + Number(tax);
+      let total = Number(((subtotal * 100 + tax * 100)/100).toFixed(2));
 
       $(".subtotal").html(`Subtotal: ${subtotal}`);
       $(".tax").html(`Tax: ${tax}`);
-      $(".total").html(`TOTAL: ${Number(subtotal) + Number(tax)}`);
+      $(".total").html(`TOTAL: ${total}`);
 
       $("#checkout-button").click(function() {
         let phone = document.getElementById("phone").value;
