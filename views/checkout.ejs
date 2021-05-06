@@ -93,7 +93,10 @@
         let phone = document.getElementById("phone").value;
         let time = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-        const insertOrder = {time_placed: time, subtotal: subtotal * 100, tax: tax * 100, final_price: total * 100, phone: phone};
+        const insertOrder = {time_placed: time, subtotal: subtotal * 100, tax: Math.round(tax * 100), final_price: Math.round(total * 100), phone: phone};
+
+        console.log(insertOrder)
+        console.log(insertOrder_item)
 
         $.post("/orderplaced", { insertOrder, insertOrder_item })
         .done(function(res){
