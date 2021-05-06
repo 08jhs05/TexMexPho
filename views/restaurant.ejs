@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>Restaurant Page</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -22,11 +22,11 @@
   <body>
     <div class="main">
     <%- include('partials/_header'); %>
-    <h1>RESTAURANT</h1>
-    <p> THIS IS FILLER TEXT </p>
-
-
-    <h3>NEW ORDERS</h3>
+    <div class="restaurant-body">
+    <br>
+    <br>
+    <br>
+    <h1>NEW ORDERS</h1>
     <div class="new-order-container">
 
       <% if (arrObj[0].length) { %> 
@@ -42,5 +42,6 @@
     <div class="pending-order-container">
       <%- include('partials/_pending_item'); %>
     </div> -->
+    </div>
   </body>
 </html>

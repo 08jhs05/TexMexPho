@@ -25,7 +25,7 @@ const pool = new Pool({
 const getUserOrder = function() {
   return pool
   .query(`
-  SELECT order_id, menu_items.name, quantity, menu_items.price, orders.phone
+  SELECT order_id, menu_items.name, quantity, menu_items.price, orders.phone, orders.final_price
   FROM order_items
   JOIN menu_items ON menu_items.id = menu_id
   JOIN orders ON orders.id = order_id
@@ -66,6 +66,7 @@ module.exports = (db) => {
         let arrObjIndex=0;
         let flag = true;
         
+        console.log(totalOrders)
         //Change otherOrder to totalOrders in order to use real database
         for (let objId of totalOrders) {
           if (flag) {

@@ -16,8 +16,8 @@
       <p class="card-text">Modifications explained here.</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><b>TOTAL:</b>
-        <%= sum %>
+      <li class="list-group-item"><b>TOTAL: </b>
+        $<%=(newOrder[0]['final_price']/100).toFixed(2) %>
       </li>
     </ul>
     <div class="card-body">
@@ -25,8 +25,8 @@
       <textarea hidden class="sms-post" name="order_to_delete"><%=newOrder[0]['order_id'] %></textarea>
       <textarea hidden class="derp" name="phone"><%=newOrder[0]['phone'] %></textarea>
 
-      <textarea class="sms-post" name="sms_customer" placeholder="Type SMS to customer and click accept or reject"></textarea>
-      <button type="submit" name="accept" class="btn btn-success">ACCEPT</button>
+      <textarea class="sms-post" name="sms_customer" placeholder="Type SMS to customer and click send">Your TexMexPho order# <%=newOrder[0]['order_id'] %> is ready for pickup!</textarea>
+      <button type="submit" name="accept" class="btn btn-success">SEND</button>
       <!-- <button type="submit" name="reject" class="btn btn-danger">REJECT</button> -->
     </form>
     </div>
