@@ -3,9 +3,9 @@ const express = require("express");
 const router = express.Router();
 //require the tempDB from server.js
 let { tempDB, restaurantMsg, confirmOrder } = require("../server");
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const client = require('twilio')(accountSid, authToken);
 
 
 
@@ -17,16 +17,16 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
 
     // Add twilio functionality here - IM
-    let restMsg = 'Hi TexMexPho, you received an order. Please refresh restuarant page';
-    client.messages
-    .create({
-      body: restMsg,
-      from: '+18326484365',
-      to: '+16475028583'
-    })
-    .then(message => console.log(message.sid));
+    // let restMsg = 'Hi TexMexPho, you received an order. Please refresh restuarant page';
+    // client.messages
+    // .create({
+    //   body: restMsg,
+    //   from: TWILIO_NUMBER,
+    //   to: RESTAURANT_NUMBER
+    // })
+    // .then(message => console.log(message.sid));
 
-    console.log(restMsg);
+    // console.log(restMsg);
 
 
     insertOrder = req.body.insertOrder;
