@@ -95,8 +95,6 @@
 
         const insertOrder = {time_placed: time, subtotal: subtotal * 100, tax: Math.round(tax * 100), final_price: Math.round(total * 100), phone: phone};
 
-        console.log(insertOrder)
-        console.log(insertOrder_item)
 
         $.post("/orderplaced", { insertOrder, insertOrder_item })
         .done(function(res){
