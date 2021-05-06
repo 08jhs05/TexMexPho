@@ -79,6 +79,8 @@ module.exports = (db) => {
           }   
         }
 
+        console.log('This is arrObj:' + arrObj)
+
         res.render("restaurant", {  arrObj });
       })
       .catch((err) => {
