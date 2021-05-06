@@ -11,6 +11,10 @@ body {
     position: fixed;
     width: 100%;
 
+    //ADDED Z INDEX - IM
+    z-index:2;
+
+
     nav {
       background-color: brown;
       font-family: 'Roboto', sans-serif;
@@ -273,6 +277,7 @@ body {
 .new-order-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .order-placed-container {
@@ -300,8 +305,6 @@ body {
   margin: 10px;
 
   .sms-post {
-    //background-color: transparent;
-    //border: none;
     outline: none;
     font-family: inherit;
     width: 100%;
