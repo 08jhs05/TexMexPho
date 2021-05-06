@@ -3,9 +3,9 @@
 //add font 'Freckle Face'
 @import url('https://fonts.googleapis.com/css2?family=Freckle+Face&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 body {
-  background-color: #EEE;
+  background-image: url('./landing-backgound.png');
 
   header {
     position: fixed;
@@ -33,6 +33,42 @@ body {
     }
   }
 
+  .landing-container {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    #tmp {
+      font-family: 'Russo One', sans-serif;
+      font-size: 100px;
+      display: flex;
+      -webkit-text-stroke: 2px black;
+      #tex {
+        color: rgb(0, 228, 0);
+      }
+      #mex {
+        color: rgb(255, 230, 0);
+      }
+      #pho {
+        color: red;
+      }
+    }
+
+    #order-now {
+      font-family: 'Russo One', sans-serif;
+      font-size: 30px;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      width: 400px;
+      height: 60px;
+    }
+
+    #photaco {
+      margin-top: 20px;
+      width: 450px;
+    }
+  }
+
   .checkoutItems {
     padding-top: 80px;
   }
@@ -42,13 +78,14 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 
     #sidebar {
+      background-image: url('/pictures/paper-texture.jpg');
       margin-top: 71px;
       padding-top: 60px;
       position: fixed;
       color: black;
       height: 100vh;
       width: 340px;
-      box-shadow: 10px 0px 10px grey;
+      box-shadow: 10px 0px 10px #e2d5b5;
 
       #sidebar-title {
         font-size: 28px;
@@ -76,27 +113,26 @@ body {
   }
 
   .header-filler {
-    height: 80px;
+    height: 100px;
   }
 
   .checkout-container {
-    height: 600px;
+    font-family: 'Roboto', sans-serif;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    background-color: gray;
+    background-color: rgb(224, 211, 211);
     border: solid black !important;
     border-width: 6px;
     border-radius: 30px;
 
     .order-title {
-      margin-left: 20px;
+      margin: 20px 0 0 5%;
     }
 
     .borderline {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      width: 100%;
+      margin: 20px auto 20px auto;
+      width: 90%;
       height: 2px;
       background-color: black;
     }
@@ -106,23 +142,45 @@ body {
       justify-content: space-around;
     }
 
+    .quantity-btn {
+      margin-left: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
     .order-item-rows {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 10% 0 5%;
+
+      .item-quantity {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .arrow:hover {
+          color: red;
+        }
+      }
+    }
+
+    .form-phone {
+      float: right;
+      margin: 0 5% 20px 0;
     }
 
     .tax-total-row {
       margin-top: 20px;
-      margin-bottom: 20px;
-      margin-right: 20px;
+      margin-bottom: 30px;
+      margin-right: 5%;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
     }
 
     #checkout-button {
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto 30px auto;
       width: 90%;
     }
   }
@@ -212,8 +270,31 @@ body {
   }
 }
 
-// RESTAURANT CSS
+.new-order-container {
+  display: flex;
+  flex-direction: row;
+}
 
+.order-placed-container {
+  padding-top: 150px;
+  font-family: 'Russo One', sans-serif;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-text-stroke: 2px black;
+
+  h1 {
+    font-size: 60px;
+  }
+
+  p {
+    font-size: 24px;
+    margin-bottom: 60px;
+  }
+}
+
+// RESTAURANT CSS
 
 .card {
   margin: 10px;
@@ -234,9 +315,4 @@ body {
     resize: none;
   }
 
-}
-
-.new-order-container {
-  display: flex;
-  flex-direction: row;
 }

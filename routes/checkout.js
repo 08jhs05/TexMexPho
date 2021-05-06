@@ -18,7 +18,6 @@ module.exports = (db) => {
     const promises = [];
 
     for(const item in cart) {
-      //console.log(cart[item].menu_id);
       promises.push(db.query(`SELECT * FROM menu_items WHERE id = $1;`, [cart[item].menu_id]))
     }
 

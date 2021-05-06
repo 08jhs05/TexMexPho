@@ -13,14 +13,28 @@
   </head>
 
   <body>
-    <%- include('partials/_header'); %>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>THANK YOU FOR YOUR ORDER</h1>
-    <p> Your order number is: 1 </p>
-    <p> Please wait for a text </p>
-
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="navbar-brand ml-5" href="/">TexMexPho</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link mr-4" href="/menu">MENU</a>
+            <a class="nav-item nav-link mr-4" href="/">LOCATION</a>
+            <a class="nav-item nav-link mr-4" href="/">ABOUT US</a>
+            <form class="nav-item form-inline" action="/menu" method="GET">
+              <button type="submit" class="btn btn-outline-light">ORDER AGAIN</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="order-placed-container">
+      <h1>THANK YOU FOR YOUR ORDER!</h1>
+      <p> You will receive a message when your order is ready.</p>
+      <img src="./pictures/sombra.png">
+    </div>
   </body>
 </html>

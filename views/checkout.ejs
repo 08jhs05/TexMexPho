@@ -15,7 +15,25 @@
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   </head>
   <body>
-    <%- include('partials/_header'); %>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="navbar-brand ml-5" href="/">TexMexPho</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link mr-4" href="/menu">MENU</a>
+            <a class="nav-item nav-link mr-4" href="/">LOCATION</a>
+            <a class="nav-item nav-link mr-4" href="/">ABOUT US</a>
+            <form class="nav-item form-inline" action="/menu" method="GET">
+              <button type="submit" class="btn btn-outline-light">BACK TO MENU</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
     <div class="header-filler"> </div>
     <div class="checkout-container">
       <h3 class="order-title">Your Order</h3>
@@ -29,19 +47,23 @@
         <% for(const item in templatevars) { %>
           <div class="order-item-rows">
             <div class="item-name"> <img src="<%= templatevars[item].photo_url %> asdasd.jpg" class="item-photo"> <%= item %> </div>
-            <div class="item-quantity"> <%= templatevars[item].quantity %> </div>
-            <div class="item-price"> <%= (templatevars[item].price/100).toFixed(2) %> </div>
-            <div class="item-total"> <%= ((templatevars[item].price * templatevars[item].quantity)/100).toFixed(2) %> </div>
+            <div class="item-quantity"><%= templatevars[item].quantity %>
+              <div class="quantity-btn">
+                <div class="arrow">▲</div>
+                <div class="arrow">▼</div>
+                </div></div>
+            <div class="item-price"><%= (templatevars[item].price/100).toFixed(2) %> </div>
+            <div class="item-total"><%= ((templatevars[item].price * templatevars[item].quantity)/100).toFixed(2) %> </div>
           </div>
         <% } %>
         <div class="tax-total-row">
           <div class="subtotal"></div>
           <div class="tax"></div>
-          <div class="borderline"></div>
-          <div class="total"></div>
         </div>
-        <form>
-          <label for="text" class="inline-label">Phone number: </label>
+        <div class="borderline"></div>
+        <div class="total tax-total-row"></div>
+        <form class="form-phone">
+          <label for="text" class="inline-label">PHONE NUMBER : &nbsp;&nbsp;</label>
           <input type="text" id="phone" name="fname"><br>
         </form>
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="checkout-button">CHECKOUT</button>
@@ -63,14 +85,15 @@
       let tax = ( subtotal * 0.13 ).toFixed(2);
       let total = Number(((subtotal * 100 + tax * 100)/100).toFixed(2));
 
-      $(".subtotal").html(`Subtotal: ${subtotal}`);
-      $(".tax").html(`Tax: ${tax}`);
-      $(".total").html(`TOTAL: ${total}`);
+      $(".subtotal").html(`Subtotal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ ${subtotal}`);
+      $(".tax").html(`Tax: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ ${tax}`);
+      $(".total").html(`TOTAL: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ ${total}`);
 
       $("#checkout-button").click(function() {
         let phone = document.getElementById("phone").value;
+        let time = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-        const insertOrder = {time_placed:  '2021-05-03 18:03:02', subtotal: subtotal * 100, tax: tax * 100, final_price: total * 100, phone: phone};
+        const insertOrder = {time_placed: time, subtotal: subtotal * 100, tax: tax * 100, final_price: total * 100, phone: phone};
 
         $.post("/orderplaced", { insertOrder, insertOrder_item })
         .done(function(res){
