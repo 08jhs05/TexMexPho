@@ -28,9 +28,11 @@
 
     <h3>NEW ORDERS</h3>
     <div class="new-order-container">
+
+      <% if (arrObj[0].length) { %> 
     <% for(let newOrder of arrObj) { %>
       <%- include('partials/_restaurant_item', { newOrder }); %>
-    <% } %>
+      <% }} %>
 
 
     </div>
