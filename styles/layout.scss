@@ -158,6 +158,11 @@ body {
       align-items: center;
       margin: 20px 10% 0 5%;
 
+      .item-photo {
+        width: 80px;
+        height: 80px;
+      }
+
       .item-quantity {
         display: flex;
         flex-direction: row;
