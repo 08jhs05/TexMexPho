@@ -3,31 +3,27 @@ const express = require("express");
 const router = express.Router();
 //require the tempDB from server.js
 let { tempDB, restaurantMsg, confirmOrder } = require("../server");
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const authToken = process.env.TWILIO_AUTH_TOKEN;
-// const client = require('twilio')(accountSid, authToken);
+const accountSid2 = process.env.TWILIO_ACCOUNT_SID2;
+const authToken2 = process.env.TWILIO_AUTH_TOKEN2;
+const client = require('twilio')(accountSid2, authToken2);
 
-
-
-
-let newOrder = {}
+let orderNum = 0;
 
 module.exports = (db) => {
 
   router.post("/", (req, res) => {
 
-    // Add twilio functionality here - IM
-    // let restMsg = 'Hi TexMexPho, you received an order. Please refresh restuarant page';
-    // client.messages
-    // .create({
-    //   body: restMsg,
-    //   from: TWILIO_NUMBER,
-    //   to: RESTAURANT_NUMBER
-    // })
-    // .then(message => console.log(message.sid));
+    //Add twilio functionality here - IM
+    let restMsg = 'Hi TexMexPho, you received an order. Please refresh restuarant page';
+    client.messages
+    .create({
+      body: restMsg,
+      from: '+19122747603',
+      to: '+16475028583'
+    })
+    .then(message => console.log(message.sid));
 
-    // console.log(restMsg);
-
+    console.log(restMsg);
 
     insertOrder = req.body.insertOrder;
     insertOrder_item = req.body.insertOrder_item;
@@ -35,6 +31,8 @@ module.exports = (db) => {
     db.query(`INSERT INTO orders (time_placed, subtotal, tax, final_price, phone) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [insertOrder.time_placed, insertOrder.subtotal, insertOrder.tax, insertOrder.final_price,insertOrder.phone])
     .then( result_orders => {
       const order_id = result_orders.rows[0].id;
+
+      orderNum = order_id;
 
       const promises = [];
 
@@ -54,7 +52,7 @@ module.exports = (db) => {
   })
 
   router.get("/", (req, res) => {
-    res.render("orderplaced", newOrder);
+    res.render("orderplaced", { orderNum });
   });
 
   return router;
